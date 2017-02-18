@@ -3,8 +3,7 @@ package org.rdlopes.gumshoe;
 import org.slf4j.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 import static java.awt.Toolkit.getDefaultToolkit;
 import static org.slf4j.LoggerFactory.getLogger;
@@ -14,11 +13,11 @@ import static org.slf4j.LoggerFactory.getLogger;
  * Date: 30/04/2015
  * Time: 20:37
  */
-@ComponentScan
 @SpringBootApplication
+@EnableConfigurationProperties(GumshoeProperties.class)
 public class GumshoeApplication {
 
-    private static final Logger LOGGER = getLogger(GumshoeApplication.class);
+    private static final Logger log = getLogger(GumshoeApplication.class);
 
     public static void main(String[] args) {
         // setup global properties
@@ -26,13 +25,14 @@ public class GumshoeApplication {
         System.setProperty("java.awt.headless", "false");
         getDefaultToolkit();
 
-        // start
-        ConfigurableApplicationContext applicationContext = SpringApplication.run(GumshoeApplication.class, args);
-
+        // log properties
         System.getProperties().stringPropertyNames()
-                .stream()
-                .sorted()
-                .forEach(s -> LOGGER.info("System Property {}={}", s, System.getProperty(s)));
+              .stream()
+              .sorted()
+              .forEach(s -> log.info("System Property {}={}", s, System.getProperty(s)));
+
+        // start
+        SpringApplication.run(GumshoeApplication.class, args);
     }
 
 }

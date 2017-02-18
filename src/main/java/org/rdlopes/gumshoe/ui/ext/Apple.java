@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package org.rdlopes.gumshoe.platform.impl.ext;
+package org.rdlopes.gumshoe.ui.ext;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,7 +51,7 @@ public enum Apple implements InvocationHandler {
      */
     private boolean isListener;
 
-    private Apple() {
+    Apple() {
 
     }
 
